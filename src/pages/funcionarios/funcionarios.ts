@@ -31,7 +31,7 @@ export class FuncionariosPage {
         this.items = response;
       },
       error => {
-        console.log(error);
+        
       });
   }
 }

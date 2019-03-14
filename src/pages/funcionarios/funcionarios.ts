@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FuncionarioService } from '../../services/domain/funcionario.service';
+import { FuncionarioDTO } from '../../models/funcionario.dto';
 
 /**
  * Generated class for the FuncionariosPage page.
@@ -16,6 +17,8 @@ import { FuncionarioService } from '../../services/domain/funcionario.service';
 })
 export class FuncionariosPage {
 
+  items: FuncionarioDTO[];
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -25,7 +28,7 @@ export class FuncionariosPage {
   ionViewDidLoad() {
     this.funcionarioService.findAll()
       .subscribe(response => {
-        console.log(response);
+        this.items = response;
       },
       error => {
         console.log(error);

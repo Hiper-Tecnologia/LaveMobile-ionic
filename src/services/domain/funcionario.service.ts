@@ -27,4 +27,3 @@ export class FuncionarioService {
             `${API_CONFIG.baseUrl}/funcionarios/login?value=${login}`)};//,
             //{'headers': authHeader});
     }
-}

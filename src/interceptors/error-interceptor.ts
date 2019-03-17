@@ -7,7 +7,7 @@ import { NON_TEXT_INPUT_REGEX } from 'ionic-angular/umd/util/dom';
 export class ErrorInterceptor implements HttpInterceptor {
     
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("Passou no interceptor");
+        //console.log("Passou no interceptor");
         return next.handle(req)
         .catch((error, caught) => {
 

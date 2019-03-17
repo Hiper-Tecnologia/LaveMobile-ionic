@@ -20,11 +20,11 @@ export class FuncionarioService {
 
     findByLogin(login: string) : Observable<FuncionarioDTO> {
 
-        let token = this.storage.getLocalUser().token;
-        let authHeader = new HttpHeaders({'Authorization': 'Bearer '+ token});
+        //let token = this.storage.getLocalUser().token;
+        //let authHeader = new HttpHeaders({'Authorization': 'Bearer '+ token});
 
         return this.http.get<FuncionarioDTO>(
-            `${API_CONFIG.baseUrl}/funcionarios/login?value=${login}`,
-            {'headers': authHeader});
+            `${API_CONFIG.baseUrl}/funcionarios/login?value=${login}`)};//,
+            //{'headers': authHeader});
     }
 }

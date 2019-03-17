@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { Observable } from 'rxjs/Rx'; // IMPORT ATUALIZADO
 import { NON_TEXT_INPUT_REGEX } from 'ionic-angular/umd/util/dom';
+import { StorageService } from '../services/storage.services';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     
+    constructor(public storage: StorageService){
+
+    }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         //console.log("Passou no interceptor");
         return next.handle(req)
@@ -22,10 +27,21 @@ export class ErrorInterceptor implements HttpInterceptor {
             
             console.log("Erro detectado pelo interceptor.");
             console.log(errorObj);
+            
+            switch(errorObj.status) {
+                case 403:
+                this.handle403();
+                break;
+            }
 
             return Observable.throw(errorObj);
         }) as any;
     }
+
+    handle403() {
+        this.storage.setLocalUser(null);
+    }
+
 }
 
 export const ErrorInterceptorProvider = {

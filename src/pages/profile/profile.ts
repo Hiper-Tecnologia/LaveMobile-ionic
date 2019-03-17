@@ -29,9 +29,14 @@ export class ProfilePage {
           this.funcionario = response;
           //buscar imagem
         }, 
-        error =>{});
-        
-      //this.login = localUser.login;
+        error =>{
+          if (error.status == 403) {
+            this.navCtrl.setRoot('HomePage');
+          }
+        });
+    }
+    else {
+      this.navCtrl.setRoot('HomePage');
     }
   }
 

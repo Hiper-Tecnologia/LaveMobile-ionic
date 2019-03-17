@@ -2,13 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FuncionarioService } from '../../services/domain/funcionario.service';
 import { FuncionarioDTO } from '../../models/funcionario.dto';
-
-/**
- * Generated class for the FuncionariosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { PassadorService } from '../../services/domain/passador.service';
 
 @IonicPage()
 @Component({
@@ -22,7 +16,8 @@ export class FuncionariosPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public funcionarioService: FuncionarioService) {
+    public funcionarioService: FuncionarioService,
+    public passadorService: PassadorService) {
   }
 
   ionViewDidLoad() {
@@ -33,5 +28,12 @@ export class FuncionariosPage {
       error => {
         
       });
+  }
+
+  addToPassador(funcionario: FuncionarioDTO) {
+    console.log('Funcionário: '+funcionario.nome);
+    console.log(this.passadorService.addFuncionario(funcionario));
+    this.navCtrl.setRoot('PassadorPage');
+   
   }
 }

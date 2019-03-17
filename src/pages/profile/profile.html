@@ -8,5 +8,9 @@
 </ion-header>
 
 <ion-content padding>
-{{ login }}
+  <ion-avatar>
+    <img class="circle" [src]="'assets/imgs/pessoa.jpg'">
+  </ion-avatar>
+  <h2 text-center>{{funcionario?.nome}}</h2>
+  <p text-center>{{funcionario?.flogin}}</p>
 </ion-content>

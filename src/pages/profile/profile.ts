@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../services/storage.services';
+import { FuncionarioDTO } from '../../models/funcionario.dto';
+import { FuncionarioService } from '../../services/domain/funcionario.service';
 
 @IonicPage()
 @Component({
@@ -9,18 +11,27 @@ import { StorageService } from '../../services/storage.services';
 })
 export class ProfilePage {
 
-  login: string;
+  //login: string;
+  funcionario: FuncionarioDTO;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public storage: StorageService) {
+    public storage: StorageService,
+    public funcionarioService: FuncionarioService) {
   }
 
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.login) {
-      this.login = localUser.login;
+      this.funcionarioService.findByLogin(localUser.login)
+        .subscribe(response => {
+          this.funcionario = response;
+          //buscar imagem
+        }, 
+        error =>{});
+        
+      //this.login = localUser.login;
     }
   }
 

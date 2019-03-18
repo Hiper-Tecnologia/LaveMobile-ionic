@@ -22,6 +22,10 @@ export class FuncionariosPage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     let loader = this.presentLoading();
     this.funcionarioService.findAll()
       .subscribe(response => {
@@ -46,5 +50,12 @@ export class FuncionariosPage {
     });
     loader.present();
     return loader;
+  }
+
+  doRefresh(refresher) {
+    this.loadData();
+    setTimeout(() => {
+      refresher.complete();
+    }, 2000);
   }
 }

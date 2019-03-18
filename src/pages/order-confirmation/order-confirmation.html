@@ -1,36 +1,55 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Confira a Produção</ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title *ngIf="codproducao">Produção registrada!</ion-title>
+      <ion-title *ngIf="!codproducao">Confira a produção</ion-title>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-header> 
-      Funcionários x Produção
-    </ion-card-header>
 
-    <ion-item>
-      <h2>Lacre: {{passador.id_piloto_mestre}}</h2>
-    </ion-item>
-
-    <ion-list>
-      <ion-item *ngFor="let funcionario of itens">
-       <ion-thumbnail item-start>
-          <img [src]="'assets/imgs/pessoa.jpg'">
-        </ion-thumbnail>
-        <h2>{{funcionario.funcionario.nome}}</h2>
-        <p>Produção : {{funcionario.quantidade}}</p>
-      </ion-item>
+    <ion-card>
+      <ion-card-header> 
+        Funcionários x Produção
+      </ion-card-header>
 
       <ion-item>
-        <h2>Total</h2>
-        <h2 item-end>{{total()}}</h2>
+        <h2>Lacre: {{passador.id_piloto_mestre}}</h2>
       </ion-item>
 
-    </ion-list>
-  </ion-card>
+      <ion-list>
+        <ion-item *ngFor="let funcionario of itens">
+        <ion-thumbnail item-start>
+            <img [src]="'assets/imgs/pessoa.jpg'">
+          </ion-thumbnail>
+          <h2>{{funcionario.funcionario.nome}}</h2>
+          <p>Produção : {{funcionario.quantidade}}</p>
+        </ion-item>
 
-  <button ion-button block (click)="checkout()">Confirmar produção</button>
-  <button ion-button block outline (click)="back()">Voltar</button>  
+        <ion-item>
+          <h2>Total</h2>
+          <h2 item-end>{{total()}}</h2>
+        </ion-item>
+
+      </ion-list>
+    </ion-card>
+  
+  <button *ngIf="!codproducao" ion-button block (click)="checkout()">Confirmar produção</button>
+  <button *ngIf="!codproducao" ion-button block outline (click)="back()">Voltar</button>  
+
+
+  <div *ngIf="codproducao">
+    <ion-card>
+      <ion-card-header>
+        Sua produção foi registrada!
+      </ion-card-header>
+      <ion-item>
+        <h2>Código da produção: {{codproducao}}</h2>
+      </ion-item>
+    </ion-card>
+
+    <button ion-button block outline (click)="home()">Voltar</button>  
+  </div>
 </ion-content>

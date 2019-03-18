@@ -13,8 +13,9 @@ import { PedidoService } from '../../services/domain/pedido.service';
 export class OrderConfirmationPage {
 
 
-  passador : PassadorDTO;
+  passador: PassadorDTO;
   itens: passadorItem[];
+  codproducao: string;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -26,13 +27,9 @@ export class OrderConfirmationPage {
   }
 
   ionViewDidLoad() {
-    if (this.passador.id_piloto_mestre == null) {
-      this.navCtrl.setRoot('HomePage');
-    } error => {this.navCtrl.setRoot('HomePage')}
-    
     this.itens = this.passadorService.getPassador().itens;
   }
-
+  
   total() {
     return this.passadorService.total();    
   }
@@ -41,11 +38,14 @@ export class OrderConfirmationPage {
     this.navCtrl.setRoot('PassadorPage'); 
   }
 
+  home(){
+    this.navCtrl.setRoot('FuncionariosPage');
+  }
   checkout() {
     this.pedidoService.insert(this.passador)
       .subscribe(response => {
         this.passadorService.createOrClearPassador();
-        console.log(response.headers.get('location'));
+         this.codproducao = this.extractId(response.headers.get('location'));
       },
       error => {
         if (error.status == 403) {
@@ -54,4 +54,8 @@ export class OrderConfirmationPage {
       });
   }
 
+  private extractId(location : string) : string {
+    let position = location.lastIndexOf('/');
+    return location.substring(position + 1, location.length);
+  }
 }

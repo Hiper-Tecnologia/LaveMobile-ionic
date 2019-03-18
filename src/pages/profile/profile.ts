@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../services/storage.services';
-import { FuncionarioDTO } from '../../models/funcionario.dto';
+import { FuncionarioDTO } from "../../models/funcionario.dto";
 import { FuncionarioService } from '../../services/domain/funcionario.service';
 
 @IonicPage()

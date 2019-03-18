@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Conclusão de Produção</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<form (ngSubmit)="dadosCheckout(); $event.preventDefault()">
+  <ion-item>
+    <ion-label stacked>Número do Lavado</ion-label>
+    <ion-input [(ngModel)]="producao.id_piloto_mestre" name="id_piloto_mestre" type="text"></ion-input>
+  </ion-item>
+  <button ion-button block type="submit">Encerrar produção</button>
+</form>
+</ion-content>

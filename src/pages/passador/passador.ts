@@ -11,7 +11,7 @@ import { FuncionarioDTO } from "../../models/funcionario.dto";
 })
 export class PassadorPage {
 
-  funcionarios: passadorItem[];
+  itens: passadorItem[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -20,19 +20,19 @@ export class PassadorPage {
 
   ionViewDidLoad() {
     let passador = this.passadorService.getPassador();
-    this.funcionarios = passador.funcionarios;
+    this.itens = passador.itens;
   }
   
   removeFuncionario(funcionario: FuncionarioDTO) {
-    this.funcionarios = this.passadorService.removeFuncionario(funcionario).funcionarios;
+    this.itens = this.passadorService.removeFuncionario(funcionario).itens;
   }
 
   increaseProducao(funcionario: FuncionarioDTO) {
-    this.funcionarios = this.passadorService.increaseProducao(funcionario).funcionarios;
+    this.itens = this.passadorService.increaseProducao(funcionario).itens;
   }
 
   decreaseProducao(funcionario: FuncionarioDTO) {
-    this.funcionarios = this.passadorService.decreaseProducao(funcionario).funcionarios;
+    this.itens = this.passadorService.decreaseProducao(funcionario).itens;
   }
 
   total() : number {

@@ -11,7 +11,7 @@ export class PassadorService {
     }
 
     createOrClearPassador() : Passador {
-        let passador: Passador = {funcionarios: []};
+        let passador: Passador = {itens: []};
         this.storage.setPassador(passador);
         return passador;
     }
@@ -26,9 +26,9 @@ export class PassadorService {
 
     addFuncionario(func: FuncionarioDTO) : Passador {
         let passador = this.getPassador();
-        let position = passador.funcionarios.findIndex(x => x.funcionario.id == func.id);
+        let position = passador.itens.findIndex(x => x.funcionario.id == func.id);
         if (position == -1) {
-            passador.funcionarios.push({quantidade: 1, funcionario: func});
+            passador.itens.push({quantidade: 1, funcionario: func});
         }
         this.storage.setPassador(passador);
         return passador;
@@ -36,20 +36,19 @@ export class PassadorService {
 
     removeFuncionario(func: FuncionarioDTO) : Passador {
         let passador = this.getPassador();
-        let position = passador.funcionarios.findIndex(x => x.funcionario.id == func.id);
+        let position = passador.itens.findIndex(x => x.funcionario.id == func.id);
         if (position != -1) {
-            passador.funcionarios.splice(position,1);
+            passador.itens.splice(position,1);
         }
         this.storage.setPassador(passador);
         return passador;
     }
     
     increaseProducao(func: FuncionarioDTO) : Passador {
-        console.log("increase passou por aqui!");
         let passador = this.getPassador();
-        let position = passador.funcionarios.findIndex(x => x.funcionario.id == func.id);
+        let position = passador.itens.findIndex(x => x.funcionario.id == func.id);
         if (position != -1) {
-            passador.funcionarios[position].quantidade++;
+            passador.itens[position].quantidade++;
         }
         this.storage.setPassador(passador);
         return passador;
@@ -57,10 +56,10 @@ export class PassadorService {
 
     decreaseProducao(func: FuncionarioDTO) : Passador {
         let passador = this.getPassador();
-        let position = passador.funcionarios.findIndex(x => x.funcionario.id == func.id);
+        let position = passador.itens.findIndex(x => x.funcionario.id == func.id);
         if (position != -1) {
-            passador.funcionarios[position].quantidade--;
-            if (passador.funcionarios[position].quantidade < 1) {
+            passador.itens[position].quantidade--;
+            if (passador.itens[position].quantidade < 1) {
                 passador = this.removeFuncionario(func);
             }
         }
@@ -71,8 +70,8 @@ export class PassadorService {
     total() : number {
         let passador = this.getPassador();
         let sum = 0;
-        for (var i=0; i<passador.funcionarios.length; i++) {
-            sum += passador.funcionarios[i].quantidade;
+        for (var i=0; i<passador.itens.length; i++) {
+            sum += passador.itens[i].quantidade;
         }
         return sum;
     }

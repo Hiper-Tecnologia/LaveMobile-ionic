@@ -13,23 +13,24 @@ import { Passador } from '../../models/passador';
 export class CheckoutPage {
 
   lista: Passador;
+  //producao: PassadorDTO;
 
-  producao: PassadorDTO = {
-    id : '',
-    funcionarios: null,
-    finalizacao: null,
-    id_piloto_mestre: '',
-    finalizado: '',
-    operador:''
-  }
-  
-  
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public storage: StorageService,
               public passadorService: PassadorService
               ){
             }
+
+            producao: PassadorDTO = {
+              id : '',
+              itens: null ,
+              finalizacao: null,
+              id_piloto_mestre: '0',
+              finalizado: '',
+              operador:''
+            }
+  
 
   ionViewDidLoad() {
     console.log("chegou no checkout");
@@ -46,21 +47,20 @@ export class CheckoutPage {
    // }
     
       this.producao = {
-      finalizado : "1",
-      finalizacao: null,
-      funcionarios : lista.funcionarios.map(x => {return {quantidade: x.quantidade, funcionario: {id: x.funcionario.id}}})
+      itens : lista.itens.map(x => {return {quantidade: x.quantidade, funcionario: {id: x.funcionario.id}}})
     }
 //    console.log("pegou o producao:"+this.producao.finalizado);
-//    console.log(this.producao);
-            
-
   
   }
 
   dadosCheckout() {
-    console.log("enviou o form Conclusão / Checkout");
-    this.producao.operador="xuxa";
-    console.log(this.producao);
+    let localUser = this.storage.getLocalUser();
+    this.producao.operador=localUser.login;
+    //this.producao.id_piloto_mestre="123426";
+    this.producao.finalizado="1";
+    //this.producao.finalizacao = Date.now();
+    //console.log(this.producao);
+    //console.log(this.producao.itens);
     this.navCtrl.setRoot('OrderConfirmationPage', {passador: this.producao});
     //console.log("Operador :"+this.producao.operador);
     //console.log("Lavado Lacre:"+this.producao.id_piloto_mestre);

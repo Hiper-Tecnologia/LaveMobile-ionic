@@ -14,6 +14,7 @@ import { StorageService } from '../services/storage.services';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { PassadorService } from '../services/domain/passador.service';
 
+
 @NgModule({
   declarations: [
     MyApp

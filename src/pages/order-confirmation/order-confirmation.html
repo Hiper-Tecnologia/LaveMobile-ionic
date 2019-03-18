@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header> 
       Funcionários x Produção
     </ion-card-header>
 
@@ -15,7 +15,7 @@
     </ion-item>
 
     <ion-list>
-      <ion-item *ngFor="let funcionario of funcionarios">
+      <ion-item *ngFor="let funcionario of itens">
        <ion-thumbnail item-start>
           <img [src]="'assets/imgs/pessoa.jpg'">
         </ion-thumbnail>
@@ -30,4 +30,7 @@
 
     </ion-list>
   </ion-card>
+
+  <button ion-button block (click)="checkout()">Confirmar produção</button>
+  <button ion-button block outline (click)="back()">Voltar</button>  
 </ion-content>

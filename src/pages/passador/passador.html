@@ -9,15 +9,15 @@
   
   <ion-content padding>
     <ion-list>
-      <ion-item *ngFor="let funcionario of funcionarios">
+      <ion-item *ngFor="let item of itens">
         <ion-thumbnail item-start>
           <img [src]="'assets/imgs/pessoa.jpg'">
         </ion-thumbnail>
-        <h2>{{funcionario.funcionario.nome}}</h2>
-        <p>Produção : {{funcionario.quantidade}}</p>
-        <ion-icon class="nolinebreak" name="remove-circle" color="primary" (click)="decreaseProducao(funcionario.funcionario)"></ion-icon>
-        <ion-icon name="add-circle" color="primary" (click)="increaseProducao(funcionario.funcionario)"></ion-icon>
-        <ion-icon name="trash" item-end color="danger" (click)="removeFuncionario(funcionario.funcionario)"></ion-icon>
+        <h2>{{item.funcionario.nome}}</h2>
+        <p>Produção : {{item.quantidade}}</p>
+        <ion-icon class="nolinebreak" name="remove-circle" color="primary" (click)="decreaseProducao(item.funcionario)"></ion-icon>
+        <ion-icon name="add-circle" color="primary" (click)="increaseProducao(item.funcionario)"></ion-icon>
+        <ion-icon name="trash" item-end color="danger" (click)="removeFuncionario(item.funcionario)"></ion-icon>
       </ion-item>
       <ion-item *ngIf="total() > 0"> 
         <h1>Produção total</h1>
@@ -28,5 +28,5 @@
         </ion-item>
     </ion-list>
     <button ion-button block (click)="goOn()">Adicionar funcionários...</button> 
-    <button ion-button color="secondary" block (click)="checkout()">Finalizar produção</button>     
+    <button *ngIf="total() > 0" ion-button color="secondary" block (click)="checkout()">Finalizar produção</button>     
   </ion-content>

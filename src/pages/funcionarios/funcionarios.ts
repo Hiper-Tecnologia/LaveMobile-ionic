@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FuncionarioService } from '../../services/domain/funcionario.service';
 import { FuncionarioDTO } from "../../models/funcionario.dto";
 import { PassadorService } from '../../services/domain/passador.service';
@@ -17,17 +17,20 @@ export class FuncionariosPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public funcionarioService: FuncionarioService,
-    public passadorService: PassadorService) {
+    public passadorService: PassadorService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
+    let loader = this.presentLoading();
     this.funcionarioService.findAll()
       .subscribe(response => {
         this.items = response;
       },
       error => {
-        
+        loader.dismiss();
       });
+    loader.dismiss();
   }
 
   addToPassador(funcionario: FuncionarioDTO) {
@@ -35,5 +38,13 @@ export class FuncionariosPage {
     console.log(this.passadorService.addFuncionario(funcionario));
     this.navCtrl.setRoot('PassadorPage');
    
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 }
